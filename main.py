@@ -10,8 +10,6 @@ curve_extention = 'curve.csv'
 value_filename = 'values'
 value_extention = '.value.csv'
 
-# Для обработки файла curve.csv
-res = []
 
 def configure_logging():
     logging.getLogger("matplotlib.font_manager").setLevel(level=logging.WARN)
@@ -23,22 +21,22 @@ def configure_logging():
 
 
 def main():
-    """Поиск файлов c данными и обработка."""
     global res
     for root, dirs, files in os.walk(wdpath):
         for resf in files:
             # ищем curve.csv
             if resf.endswith(curve_extention):
+                res = []
                 curve_path = root + '\\' + os.path.basename(resf)
                 process_file(curve_path)
-                save_output_comsol()
+                save_output_curve()
                 res = []
             # ищем value.csv
             elif resf.endswith(value_extention):
                 den4ic = "сучка"
 
 
-#Обработка файла curve.csv
+#Обработка файлов curve.csv
 def process_file(curve_path):
     _iter = 1
     _res = []
@@ -70,7 +68,8 @@ def process_file(curve_path):
                 _iter += 1
 
 
-def save_output_comsol():
+#Запись файлов csv в папку curves
+def save_output_curve():
     """Вывод файла curves.csv."""
 
     try:
@@ -79,13 +78,12 @@ def save_output_comsol():
         pass
 
     for i in range(len(res[0])):
-        with open(f"{curve_filename}\\{res[0][i]}", "w") as f:    # Создание файла "curves.csv"
+        with open(f"{curve_filename}\\{res[0][i]}", "w") as f:    # Запись файлов csv в папку curves
             for j in range(len(res)):
                 if j == 0:
                     f.write(res[0][i] + "\n")
                 else:
                     f.write(res[j][0] + ',' + res[j][i + 1] + "\n")
-
 
 
 configure_logging()
