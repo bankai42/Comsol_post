@@ -78,7 +78,7 @@ def save_output_curve():
         pass
 
     for i in range(len(res[0])):
-        with open(f"{curve_filename}\\{res[0][i]}", "w") as f:    # Запись файлов csv в папку curves
+        with open(f"{curve_filename}\\{res[0][i]}.csv", "w") as f:    # Запись файлов csv в папку curves
             for j in range(len(res)):
                 if j == 0:
                     f.write(res[0][i] + "\n")
