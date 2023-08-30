@@ -115,6 +115,8 @@ def read_data(file):
     for unint in unints:
         if unint == '(degC)':
             values_data[i] = "{:.0f}".format(values_data[i])
+        else:
+            values_data[i] = str(values_data[i])
         i += 1
 
     data = [names, values_data, unints, descriptions]
