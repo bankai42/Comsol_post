@@ -7,18 +7,8 @@ logger = logging.getLogger()
 wdpath = os.getcwd()
 
 
-def configure_logging():
-    logging.getLogger("matplotlib.font_manager").setLevel(level=logging.WARN)
-    logger.setLevel(logging.DEBUG)
-    handler = logging.FileHandler('Python.log', 'w', 'utf-8')
-    formatter = logging.Formatter('%(asctime)s [%(name)s] %(levelname)s: %(message)s')
-    handler.setFormatter(formatter)
-    logger.addHandler(handler)
-
-
 values_extention = 'value.csv'
 values_dir = 'values'
-#units_pattern = r
 
 
 def read_data(file):
@@ -64,10 +54,6 @@ def write_new_values(data, path):
             f.write(f'{data[0][i]},{data[1][i].strip()},,,{data[2][i]},{data[3][i]},\n')
 
 
-
-
-
-
 def convert_values(values_paths):
     for path in values_paths:   
         data = read_data(path)
@@ -75,16 +61,12 @@ def convert_values(values_paths):
         write_new_values(data, path) 
     
 
-def main():
+def find_values_paths():
     """Поиск файлов c данными и обработка."""
     values_paths = []
     for root, dirs, files in os.walk(wdpath):
         for resf in files:
             if resf.endswith(values_extention) and root != 'values':
                 values_paths.append(root + '\\' + os.path.basename(resf))
-    [print(path) for path in values_paths]
-    convert_values(values_paths)
-
-
-main()
-logger.info("ALL DONE")
+    #[print(path) for path in values_paths]
+    return values_paths

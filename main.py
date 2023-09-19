@@ -52,9 +52,8 @@ def process_file(curve_path):
                 _iter += 1
                 continue
             elif _iter == 4:
-                _num = line.find(' - ')
-                _line = line[_num + 3:].strip()
-                _res = _line.split()
+                names = line.split('-')[1].strip()
+                _res = names.split()
                 res.append(_res)
                 _iter += 1
             elif _iter == 5:
