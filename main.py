@@ -98,6 +98,8 @@ def read_data(file):
                 headers_data = line[2:].split(',')
             elif i == 5:
                 values_data = line.split(',')
+                for j in range(len(values_data)):
+                    values_data[j] = float(values_data[j])
 
     names = []
     unints = []
@@ -107,8 +109,17 @@ def read_data(file):
        names.append(re.split(r'\(.*?\)', header)[0].strip())
        descriptions.append(re.split(r'\(.*?\)', header)[1].strip())
        unints.append(re.findall(r'\(.*?\)', header)[0].strip())
-    
+
+    i = 0
+    for unint in unints:
+        if unint == '(degC)':
+            values_data[i] = "{:.0f}".format(values_data[i])
+        else:
+            values_data[i] = str(values_data[i])
+        i += 1
+
     data = [names, values_data, unints, descriptions]
+
 
     return data
 
