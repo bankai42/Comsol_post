@@ -1,0 +1,5 @@
+Name,Value,Target,Condition,Dimension,Description,Comments,
+Average Temperature on Glass Surface,1100.0,,,(degC),,
+Average Temperature on Wall_1,1069.4,,,(degC),,
+Average Temperature on Wall_2,1064.0,,,(degC),,
+Average Temperature on Wall_3,1066.6,,,(degC),,
